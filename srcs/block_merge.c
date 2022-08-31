@@ -6,7 +6,7 @@
 /*   By: zweng <zweng@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 16:05:58 by zweng             #+#    #+#             */
-/*   Updated: 2022/08/29 17:19:14 by zweng            ###   ########.fr       */
+/*   Updated: 2022/08/31 16:01:22 by zweng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ t_block *merge_next_block(t_page *page, t_block *blk)
     if (page && blk && blk->next && blk->next->freed)
     {
        blk->size += blk->next->size + sizeof(t_block);
-       if (blk->next && block->next->next)
+       if (blk->next && blk->next->next)
            blk->next->next->prev = blk;
        blk->next = blk->next->next;
        page->block_count--;
@@ -42,5 +42,7 @@ t_block *merge_prev_block(t_page *page, t_block *blk)
 
 t_block *merge_block(t_page *page, t_block *blk)
 {
-    return (merge_next_block(page, blk) && merge_prev_block(page, blk));
+    if (merge_next_block(page, blk))
+        return (merge_prev_block(page, blk));
+    return (NULL);
 }
