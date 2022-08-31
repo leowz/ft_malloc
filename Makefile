@@ -6,7 +6,7 @@
 #    By: zweng <zweng@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/19 12:41:50 by zweng             #+#    #+#              #
-#    Updated: 2022/08/31 15:52:20 by zweng            ###   ########.fr        #
+#    Updated: 2022/08/31 16:07:25 by zweng            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -66,14 +66,14 @@ all: $(NAME)
 
 $(NAME): $(LIB) $(OBJS)
 	@$(CC) $(OBJS) $(LDFLAGS) $(LDLIBS) -o $@
-	#printf $(GREEN)"$(NAME) Finish linking\n"$(EOC)
+	@printf $(GREEN)"$(NAME) Finish linking\n"$(EOC)
 
 $(LIB):
 	@make -C $(LIB_PATH) fclean && make -C $(LIB_PATH)
 
 %.o:%.c
 	@printf $(GREEN)"compiling %s\n"$(EOC) $@
-	$(CC) $(CFLAGS) -o $@ -c $<
+	@$(CC) $(CFLAGS) -o $@ -c $<
 
 dclean:
 	@rm -f $(DFILES)

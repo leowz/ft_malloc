@@ -6,7 +6,7 @@
 /*   By: zweng <zweng@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/18 17:03:46 by zweng             #+#    #+#             */
-/*   Updated: 2022/08/31 16:02:01 by zweng            ###   ########.fr       */
+/*   Updated: 2022/08/31 16:05:24 by zweng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,5 +112,6 @@ t_block         *search_ptr(t_page **g_page, void *ptr);
 t_block         *merge_block(t_page *page, t_block *blk);
 void            remove_block_if_last(t_page *page, t_block *block);
 int             is_last_of_preallocated(t_page *page);
+void            delete_page_if_possible(t_page *page);
 
 #endif

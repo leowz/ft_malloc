@@ -6,7 +6,7 @@
 /*   By: zweng <zweng@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 11:27:47 by zweng             #+#    #+#             */
-/*   Updated: 2022/08/31 14:56:30 by zweng            ###   ########.fr       */
+/*   Updated: 2022/08/31 16:06:52 by zweng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int     is_last_of_preallocated(t_page *page)
     return (i < 2);
 }
 
-void    delete_page_if_empty(t_page *page)
+void    delete_page_if_possible(t_page *page)
 {
     if (page->block_count)
         return ;
@@ -42,7 +42,7 @@ void    delete_page_if_empty(t_page *page)
         page->next->prev = page->prev;
     if (!is_last_of_preallocated(page))
     {
-       if (heap == g_malloc_page) 
+       if (page == g_malloc_page) 
            g_malloc_page = page->next;
        munmap(page, page->total_size);
     }
