@@ -1,4 +1,4 @@
-/* ************************************************************************** */
+ ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
@@ -6,7 +6,7 @@
 /*   By: zweng <zweng@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 12:51:34 by zweng             #+#    #+#             */
-/*   Updated: 2022/08/24 15:04:16 by zweng            ###   ########.fr       */
+/*   Updated: 2022/08/29 16:05:15 by zweng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,10 @@ void    start_free(void *ptr)
     page = g_malloc_page;
     if (!ptr || !page)
         return ;
-    search_ptr(page, blk, ptr);
+    blk = search_ptr(&page, ptr);
     if (blk && page)
     {
        blk->freed = TRUE;
-       if (getenv_cached(ENV_SCRIBBLE))
-           ft_memeset(ptr, 0, blk->size);
        ret = merge_block(page, blk);
        blk = ret ? ret : blk;
        remove_block_if_last(page, blk);
@@ -37,5 +35,7 @@ void    start_free(void *ptr)
 
 void    free(void *ptr)
 {
+    pthread_mutex_lock(&g_malloc_mutex);
     start_free(ptr);
+    pthread_mutex_unlock(&g_malloc_mutex);
 }
