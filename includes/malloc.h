@@ -6,7 +6,7 @@
 /*   By: zweng <zweng@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/18 17:03:46 by zweng             #+#    #+#             */
-/*   Updated: 2022/08/31 16:05:24 by zweng            ###   ########.fr       */
+/*   Updated: 2022/09/25 21:47:31 by zweng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include <sys/mman.h>
 # include <sys/resource.h>
 # include "libft.h"
+# include "ft_printf.h"
 
 
 /*
@@ -42,8 +43,8 @@
 # define TINY_BLOCK (TINY_ZONE / 128)
 /* tiny page = 32 * 4096  = 131072 bytes */
 # define SMALL_ZONE (32 * getpagesize())
-/* tiny block = 131072/ 128 (times of allocation) = 1024 bytes 
- * a tiny block 128 bytes 
+/* small block = 131072/ 128 (times of allocation) = 1024 bytes 
+ * a small block 1024 bytes 
  * */
 # define SMALL_BLOCK (SMALL_ZONE / 128)
 
@@ -89,12 +90,19 @@ extern t_page		    *g_malloc_page;
 */
 
 void			*ft_malloc(size_t size);
-void			*calloc(size_t count, size_t size);
-void			*realloc(void *ptr, size_t size);
-void			*reallocf(void *ptr, size_t size);
-void			free(void *ptr);
+void			*ft_calloc(size_t count, size_t size);
+void			*ft_realloc(void *ptr, size_t size);
+void			ft_free(void *ptr);
 void			show_alloc_mem();
 void			show_alloc_mem_hex(void);
+
+/*
+ * Hepler functions
+ */
+void            *start_malloc(size_t size);
+void            start_free(void *ptr);
+void			*start_calloc(size_t count, size_t size);
+void			*start_realloc(void *ptr, size_t size);
 
 
 /*
@@ -113,5 +121,6 @@ t_block         *merge_block(t_page *page, t_block *blk);
 void            remove_block_if_last(t_page *page, t_block *block);
 int             is_last_of_preallocated(t_page *page);
 void            delete_page_if_possible(t_page *page);
+t_page          *get_last_page(t_page *page);
 
 #endif

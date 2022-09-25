@@ -6,12 +6,11 @@
 /*   By: zweng <zweng@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 12:51:34 by zweng             #+#    #+#             */
-/*   Updated: 2022/08/31 15:51:30 by zweng            ###   ########.fr       */
+/*   Updated: 2022/09/23 18:55:35 by zweng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "malloc.h"
-
 
 void    start_free(void *ptr)
 {
@@ -33,7 +32,7 @@ void    start_free(void *ptr)
     }
 }
 
-void    free(void *ptr)
+void    ft_free(void *ptr)
 {
     pthread_mutex_lock(&g_malloc_mutex);
     start_free(ptr);

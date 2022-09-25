@@ -1,40 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   malloc.c                                           :+:      :+:    :+:   */
+/*   calloc.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zweng <zweng@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/19 14:44:04 by zweng             #+#    #+#             */
-/*   Updated: 2022/09/25 21:42:06 by zweng            ###   ########.fr       */
+/*   Created: 2022/09/23 18:35:08 by zweng             #+#    #+#             */
+/*   Updated: 2022/09/23 18:55:49 by zweng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "malloc.h"
 
-t_page		        *g_malloc_page = NULL;
-pthread_mutex_t		g_malloc_mutex = PTHREAD_MUTEX_INITIALIZER;
-
-void    *start_malloc(size_t size)
+void    *start_calloc(size_t count, size_t size)
 {
-    t_block *block;
+    size_t  total_size;
+    void    *res;
 
-    if (!size)
+    total_size = size * count;
+    if (!count || !size || (total_size / count != size))
         return (NULL);
-    size = (size + 15) & ~15;
-    if ((block = try_find_available_block(size)))
-        return ((void *)BLOCK_SHIFT(block));
-    else if ((block = try_create_new_block(size)))
-        return ((void *)BLOCK_SHIFT(block));
-    return (NULL);
+    if ((res = start_malloc(total_size)))
+    {
+       ft_bzero(res, total_size);
+       return (res);
+    }
+    else 
+        return (NULL);
 }
 
-void    *ft_malloc(size_t size)
+void    *ft_calloc(size_t count, size_t size)
 {
-    void    *ptr;
+    void    *res;
 
     pthread_mutex_lock(&g_malloc_mutex);
-    ptr = start_malloc(size);
+    res = start_calloc(count, size);
     pthread_mutex_unlock(&g_malloc_mutex);
-    return (ptr);
+    return (res);
 }

@@ -6,7 +6,7 @@
 #    By: zweng <zweng@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/19 12:41:50 by zweng             #+#    #+#              #
-#    Updated: 2022/08/31 16:07:25 by zweng            ###   ########.fr        #
+#    Updated: 2022/09/25 19:27:43 by vagrant          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,8 +36,6 @@ CFILES = $(foreach D, $(C_PATH), $(wildcard $(D)/*.c))
 OBJS = $(patsubst %.c, %.o, $(CFILES))
 
 DFILES = $(patsubst %.c, %.d, $(CFILES))
-
-#CPPFLAGS = -I$(HEADER_PATH) -I$(LIB_PATH)/includes
 
 LDFLAGS = -L$(LIB_PATH)
 

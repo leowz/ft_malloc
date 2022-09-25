@@ -6,7 +6,7 @@
 /*   By: zweng <zweng@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 16:55:38 by zweng             #+#    #+#             */
-/*   Updated: 2022/08/25 16:58:45 by zweng            ###   ########.fr       */
+/*   Updated: 2022/09/25 21:40:49 by zweng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ t_page  *get_page_of_block_size(size_t size)
 		page->next = (t_page *)g_page;
 		if (page->next)
 			page->next->prev = page;
-		g_page = page;
+		g_malloc_page = page;
 	}
 	return (page);
 }

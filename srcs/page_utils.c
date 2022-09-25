@@ -6,7 +6,7 @@
 /*   By: zweng <zweng@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 11:27:47 by zweng             #+#    #+#             */
-/*   Updated: 2022/08/31 16:06:52 by zweng            ###   ########.fr       */
+/*   Updated: 2022/09/25 19:40:13 by zweng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,4 +46,13 @@ void    delete_page_if_possible(t_page *page)
            g_malloc_page = page->next;
        munmap(page, page->total_size);
     }
+}
+
+t_page  *get_last_page(t_page *page)
+{
+    if (!page)
+        return (NULL);
+    while (page->next)
+        page = page->next;
+    return (page);
 }
