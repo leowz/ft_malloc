@@ -6,7 +6,7 @@
 #    By: zweng <zweng@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/19 12:41:50 by zweng             #+#    #+#              #
-#    Updated: 2022/09/25 19:27:43 by vagrant          ###   ########.fr        #
+#    Updated: 2022/10/21 18:24:20 by zweng            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,39 +15,40 @@ ifeq ($(HOSTTYPE), )
 endif
 # ----- varaibles -----
 
-CC = gcc
+CC			= gcc
 
-NAME = ft_malloc
+NAME		= ft_malloc #libft_malloc_$(HOSTTYPE).so
 
-LIB_PATH = libft
+LIB_NAME	= ft_malloc
 
-LIB = $(LIB_PATH)/libft.a
+LIB_PATH	= srcs/lib
 
-HEADER_PATH = includes $(LIB_PATH)/includes
+HEADER_PATH	= includes
 
-C_PATH = srcs
+C_PATH 		= srcs
 
 # ---------------- transformation ------------------ #
 
-HEADER = $(HEADER_PATH)/malloc.h 
+HEADER		= $(HEADER_PATH)/malloc.h 
 
-CFILES = $(foreach D, $(C_PATH), $(wildcard $(D)/*.c))
+CFILES		= $(notdir $(foreach D, $(C_PATH), $(wildcard $(D)/*.c)))
+LIBFILES	= $(notdir $(foreach D, $(LIB_PATH), $(wildcard $(D)/*.c)))
 
-OBJS = $(patsubst %.c, %.o, $(CFILES))
+OBJS_NAME	= $(patsubst %.c, %.o, $(CFILES)) \
+	     	  $(patsubst %.c, %.o, $(LIBFILES))
+DFILES_NAME	= $(patsubst %.c, %.d, $(CFILES)) \
+			  $(patsubst %.c, %.d, $(LIBFILES))
 
-DFILES = $(patsubst %.c, %.d, $(CFILES))
-
-LDFLAGS = -L$(LIB_PATH)
-
-LDLIBS = -lft #-fsanitize=address
-
-DPFLAGS = -MD -MP
-
-CFLAGS =  -Wall -Wextra -Werror $(foreach D, $(HEADER_PATH), -I$(D)) $(DPFLAGS)
+OBJ_PATH	= obj
+DPFLAGS		= -MD -MP
+CFLAGS		= -Wall -Wextra -Werror \
+			  $(foreach D, $(HEADER_PATH), -I$(D)) $(DPFLAGS)
 
 # ----- part automatic -----
-#SRCS = $(addprefix $(SRC_PATH)/,$(SRC_NAME))
-#OBJS = $(addprefix $(OBJ_PATH)/,$(OBJ_NAME))
+SRCS = $(addprefix $(C_PATH)/,$(CFILES)) \
+	   $(addprefix $(LIB_PATH)/,$(LIBFILES))
+OBJS = $(addprefix $(OBJ_PATH)/,$(OBJS_NAME))
+DFLS = $(addprefix $(OBJ_PATH)/,$(DFILES_NAME))
 
 # ----- Colors -----
 BLACK:="\033[1;30m"
@@ -57,39 +58,37 @@ PURPLE:="\033[1;35m"
 CYAN:="\033[1;36m"
 WHITE:="\033[1;37m"
 EOC:="\033[0;0m"
-#  # ==================
+# ----- Colors -----
+# ==================
 
 # ----- part rules -----
 all: $(NAME)
 
-$(NAME): $(LIB) $(OBJS)
-	@$(CC) $(OBJS) $(LDFLAGS) $(LDLIBS) -o $@
+$(NAME): $(OBJS)
+	@$(CC) $(OBJS) -o $@
 	@printf $(GREEN)"$(NAME) Finish linking\n"$(EOC)
 
-$(LIB):
-	@make -C $(LIB_PATH) fclean && make -C $(LIB_PATH)
-
-%.o:%.c
+$(OBJ_PATH)/%.o:$(C_PATH)/%.c | $(OBJ_PATH)
 	@printf $(GREEN)"compiling %s\n"$(EOC) $@
 	@$(CC) $(CFLAGS) -o $@ -c $<
 
-dclean:
-	@rm -f $(DFILES)
-	@printf $(GREEN)"$(NAME) dclean\n"$(EOC)
+$(OBJ_PATH)/%.o:$(LIB_PATH)/%.c | $(OBJ_PATH)
+	@printf $(GREEN)"compiling %s\n"$(EOC) $@
+	@$(CC) $(CFLAGS) -o $@ -c $<
 
-clean: dclean
-	@rm -f $(OBJS)
+$(OBJ_PATH):
+	@mkdir $(OBJ_PATH) 2> /dev/null
+
+clean: 
+	@rm -f $(OBJS) $(DFLS)
+	@rm -rf $(OBJ_PATH) 2> /dev/null
 	@printf $(GREEN)"$(NAME) clean\n"$(EOC)
-	@make -C $(LIB_PATH) clean
 
-
-fclean: clean dclean
+fclean: clean
 	@/bin/rm -f $(NAME)
 	@printf $(GREEN)"$(NAME) fclean\n"$(EOC)
-	@/bin/rm -f $(LIB)
-	@printf $(GREEN)"$(LIB) fclean\n"$(EOC)
 
--include $(DFILES)
+-include $(DFLS)
 
 re: fclean all
 

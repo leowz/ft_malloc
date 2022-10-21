@@ -6,20 +6,24 @@
 /*   By: zweng <zweng@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/18 17:03:46 by zweng             #+#    #+#             */
-/*   Updated: 2022/09/25 21:47:31 by zweng            ###   ########.fr       */
+/*   Updated: 2022/10/21 18:51:17 by zweng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MALLOC_H
 # define MALLOC_H
 
+# include <unistd.h>
 # include <fcntl.h>
 # include <pthread.h>
 # include <stdlib.h>
 # include <sys/mman.h>
 # include <sys/resource.h>
-# include "libft.h"
-# include "ft_printf.h"
+
+# define TRUE 1
+# define FALSE 0
+
+# define BASE_HEX "0123456789abcdef"
 
 
 /*
@@ -122,5 +126,18 @@ void            remove_block_if_last(t_page *page, t_block *block);
 int             is_last_of_preallocated(t_page *page);
 void            delete_page_if_possible(t_page *page);
 t_page          *get_last_page(t_page *page);
+
+/*
+ *
+ * Lib functions
+ */
+void            ft_bzero(void *s, unsigned int n);
+char            *ft_strcpy(char *dst, const char *src);
+void            *ft_memmove(void *dst, const void *src, unsigned int len);
+void            ft_putchar(char c);
+void            ft_putstr(char const *s);
+void            ft_itoa_base(long long int n, int base);
+void            ft_putchar_fd(char c, int fd);
+void            ft_putstr_fd(char const *str, int fd);
 
 #endif

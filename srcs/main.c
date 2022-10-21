@@ -6,7 +6,7 @@
 /*   By: zweng <zweng@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 12:00:52 by zweng             #+#    #+#             */
-/*   Updated: 2022/09/25 21:50:59 by zweng            ###   ########.fr       */
+/*   Updated: 2022/10/21 15:58:12 by vagrant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int     main()
         input_value(ptr2, 915000);
         printf("result %d\n", ptr2[100110]);
     }
-    ft_printf("g_malloc_page: 0x%08x\n", g_malloc_page);
+    printf("g_malloc_page: %p\n", (void *)g_malloc_page);
     show_alloc_mem();
     ft_free(ptr);
     return 0;
