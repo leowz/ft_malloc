@@ -6,7 +6,7 @@
 /*   By: zweng <zweng@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/18 17:03:46 by zweng             #+#    #+#             */
-/*   Updated: 2022/10/21 18:51:17 by zweng            ###   ########.fr       */
+/*   Updated: 2022/10/27 15:11:26 by zweng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,12 +93,11 @@ extern t_page		    *g_malloc_page;
 ** Library methods
 */
 
-void			*ft_malloc(size_t size);
-void			*ft_calloc(size_t count, size_t size);
-void			*ft_realloc(void *ptr, size_t size);
-void			ft_free(void *ptr);
+void			*malloc(size_t size);
+void			*calloc(size_t count, size_t size);
+void			*realloc(void *ptr, size_t size);
+void			free(void *ptr);
 void			show_alloc_mem();
-void			show_alloc_mem_hex(void);
 
 /*
  * Hepler functions

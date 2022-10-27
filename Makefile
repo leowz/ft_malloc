@@ -6,7 +6,7 @@
 #    By: zweng <zweng@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/19 12:41:50 by zweng             #+#    #+#              #
-#    Updated: 2022/10/21 18:24:20 by zweng            ###   ########.fr        #
+#    Updated: 2022/10/27 12:49:27 by vagrant          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,9 +17,9 @@ endif
 
 CC			= gcc
 
-NAME		= ft_malloc #libft_malloc_$(HOSTTYPE).so
+NAME		= libft_malloc_$(HOSTTYPE).so
 
-LIB_NAME	= ft_malloc
+LIB_NAME	= libft_malloc.so
 
 LIB_PATH	= srcs/lib
 
@@ -41,8 +41,10 @@ DFILES_NAME	= $(patsubst %.c, %.d, $(CFILES)) \
 
 OBJ_PATH	= obj
 DPFLAGS		= -MD -MP
-CFLAGS		= -Wall -Wextra -Werror \
+CFLAGS		= -Wall -Wextra -Werror -fPIC \
 			  $(foreach D, $(HEADER_PATH), -I$(D)) $(DPFLAGS)
+
+SFLAGE		= -shared
 
 # ----- part automatic -----
 SRCS = $(addprefix $(C_PATH)/,$(CFILES)) \
@@ -65,7 +67,9 @@ EOC:="\033[0;0m"
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	@$(CC) $(OBJS) -o $@
+	@$(CC) $(SFLAGE) $(OBJS) -o $@
+	@rm -f $(LIB_NAME)
+	@ln -s $(NAME) $(LIB_NAME)
 	@printf $(GREEN)"$(NAME) Finish linking\n"$(EOC)
 
 $(OBJ_PATH)/%.o:$(C_PATH)/%.c | $(OBJ_PATH)
@@ -85,7 +89,7 @@ clean:
 	@printf $(GREEN)"$(NAME) clean\n"$(EOC)
 
 fclean: clean
-	@/bin/rm -f $(NAME)
+	@/bin/rm -f $(NAME) $(LIB_NAME)
 	@printf $(GREEN)"$(NAME) fclean\n"$(EOC)
 
 -include $(DFLS)
