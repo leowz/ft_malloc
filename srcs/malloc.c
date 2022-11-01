@@ -6,7 +6,7 @@
 /*   By: zweng <zweng@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 14:44:04 by zweng             #+#    #+#             */
-/*   Updated: 2022/10/27 15:11:04 by zweng            ###   ########.fr       */
+/*   Updated: 2022/11/01 21:07:12 by zweng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,13 +29,12 @@ void    *start_malloc(size_t size)
     return (NULL);
 }
 
-void    *malloc(size_t size)
+void    *ft_malloc(size_t size)
 {
     void    *ptr;
 
     pthread_mutex_lock(&g_malloc_mutex);
     ptr = start_malloc(size);
     pthread_mutex_unlock(&g_malloc_mutex);
-    ft_putstr("custom malloc\n");
     return (ptr);
 }

@@ -6,18 +6,19 @@
 /*   By: zweng <zweng@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 16:55:38 by zweng             #+#    #+#             */
-/*   Updated: 2022/09/25 21:40:49 by zweng            ###   ########.fr       */
+/*   Updated: 2022/11/01 22:02:12 by zweng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "malloc.h"
+#include <stdio.h>
 
 size_t  get_page_size_from_block_type(t_page_type type, size_t size)
 {
     if (type == TINY)
-        return ((size_t)TINY_BLOCK);
+        return ((size_t)TINY_ZONE);
     else if (type == SMALL)
-        return ((size_t)SMALL_BLOCK);
+        return ((size_t)SMALL_ZONE);
     else 
         return (size + sizeof(t_page) + sizeof(t_block));
 }
@@ -96,10 +97,12 @@ t_block *create_append_new_block(t_page *page, size_t size)
     t_block *new_blk;
     t_block *last_blk;
 
-    new_blk = (t_block *)PAGE_SHIFT(page);
     last_blk = NULL;
+    new_blk = (t_block *)PAGE_SHIFT(page);
     if (page->block_count && (last_blk = get_last_block(new_blk)))
-        new_blk = (t_block *)(BLOCK_SHIFT(last_blk) + last_blk->size);
+    {
+        new_blk = (void *)(BLOCK_SHIFT(last_blk) + last_blk->size);
+    }
     set_block(new_blk, size);
     if (page->block_count && last_blk)
         insert_block(last_blk, new_blk);
@@ -115,6 +118,6 @@ t_block *try_create_new_block(size_t size)
 
     if ((page = get_page_of_block_size(size)) &&
             (block = create_append_new_block(page, size)))
-        return (BLOCK_SHIFT(block));
+        return (block);
     return (NULL);
 }

@@ -6,7 +6,7 @@
 #    By: zweng <zweng@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/19 12:41:50 by zweng             #+#    #+#              #
-#    Updated: 2022/10/27 12:49:27 by vagrant          ###   ########.fr        #
+#    Updated: 2022/10/28 13:48:32 by zweng            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,6 +20,8 @@ CC			= gcc
 NAME		= libft_malloc_$(HOSTTYPE).so
 
 LIB_NAME	= libft_malloc.so
+
+APP			= ft_malloc
 
 LIB_PATH	= srcs/lib
 
@@ -44,7 +46,8 @@ DPFLAGS		= -MD -MP
 CFLAGS		= -Wall -Wextra -Werror -fPIC \
 			  $(foreach D, $(HEADER_PATH), -I$(D)) $(DPFLAGS)
 
-SFLAGE		= -shared
+SFLAGE		= -shared 
+DEBUGF 		= -fsanitize=address -g
 
 # ----- part automatic -----
 SRCS = $(addprefix $(C_PATH)/,$(CFILES)) \
@@ -64,10 +67,13 @@ EOC:="\033[0;0m"
 # ==================
 
 # ----- part rules -----
-all: $(NAME)
+all: $(APP)
+
+$(APP): $(OBJS)
+	@$(CC) $(DEBUGF) $(OBJS) -o $@
 
 $(NAME): $(OBJS)
-	@$(CC) $(SFLAGE) $(OBJS) -o $@
+	@$(CC) $(SFLAGE) $(DEBUGF) $(OBJS) -o $@
 	@rm -f $(LIB_NAME)
 	@ln -s $(NAME) $(LIB_NAME)
 	@printf $(GREEN)"$(NAME) Finish linking\n"$(EOC)

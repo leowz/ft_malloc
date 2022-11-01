@@ -6,11 +6,12 @@
 /*   By: zweng <zweng@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/27 16:46:24 by zweng             #+#    #+#             */
-/*   Updated: 2022/08/29 16:04:47 by zweng            ###   ########.fr       */
+/*   Updated: 2022/10/31 15:41:45 by zweng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "malloc.h"
+#include <stdio.h>
 
 t_block *search_ptr(t_page **g_page, void *ptr)
 {
