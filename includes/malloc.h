@@ -6,7 +6,7 @@
 /*   By: zweng <zweng@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/18 17:03:46 by zweng             #+#    #+#             */
-/*   Updated: 2022/11/01 21:38:14 by zweng            ###   ########.fr       */
+/*   Updated: 2022/11/02 11:29:32 by zweng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,6 +133,7 @@ t_page          *get_last_page(t_page *page);
 void            print_graph_page(t_page *page);
 void            print_block_header(t_block *blk);
 void            print_all_page_headers(void);
+void            print_page_header(t_page *page);
 
 /*
  *
