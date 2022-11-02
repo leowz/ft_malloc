@@ -6,7 +6,7 @@
 #    By: zweng <zweng@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/19 12:41:50 by zweng             #+#    #+#              #
-#    Updated: 2022/11/02 11:40:42 by zweng            ###   ########.fr        #
+#    Updated: 2022/11/02 12:22:01 by zweng            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -69,9 +69,6 @@ EOC:="\033[0;0m"
 # ----- part rules -----
 all: $(NAME)
 
-$(APP): $(OBJS)
-	@$(CC) $(DEBUGF) $(OBJS) -o $@
-
 $(NAME): $(OBJS)
 	@$(CC) $(SFLAGE) $(DEBUGF) $(OBJS) -o $@
 	@rm -f $(LIB_NAME)
@@ -106,4 +103,4 @@ norme:
 	@norminette $(SRCS)
 	@norminette $(HEADER_PATH)/*.h
 
-.PHONY: clean dclean fclean re norme all
+.PHONY: clean fclean re norme all
