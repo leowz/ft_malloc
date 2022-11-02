@@ -6,7 +6,7 @@
 /*   By: zweng <zweng@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/18 17:03:46 by zweng             #+#    #+#             */
-/*   Updated: 2022/11/02 11:29:32 by zweng            ###   ########.fr       */
+/*   Updated: 2022/11/02 11:39:29 by zweng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@
 # include <pthread.h>
 # include <sys/mman.h>
 # include <sys/resource.h>
-# include <stdio.h>
 
 # define TRUE 1
 # define FALSE 0
@@ -96,10 +95,10 @@ extern t_page		    *g_malloc_page;
 ** Library methods
 */
 
-void			*ft_malloc(size_t size);
-void			*ft_calloc(size_t count, size_t size);
-void			*ft_realloc(void *ptr, size_t size);
-void			ft_free(void *ptr);
+void			*malloc(size_t size);
+void			*calloc(size_t count, size_t size);
+void			*realloc(void *ptr, size_t size);
+void			free(void *ptr);
 void			show_alloc_mem();
 
 /*

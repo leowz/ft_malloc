@@ -6,12 +6,11 @@
 /*   By: zweng <zweng@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 11:27:47 by zweng             #+#    #+#             */
-/*   Updated: 2022/11/01 22:01:23 by zweng            ###   ########.fr       */
+/*   Updated: 2022/11/02 11:41:58 by zweng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "malloc.h"
-#include <stdio.h>
 
 int     is_last_of_preallocated(t_page *page)
 {

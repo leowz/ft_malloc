@@ -6,12 +6,11 @@
 /*   By: zweng <zweng@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 16:55:38 by zweng             #+#    #+#             */
-/*   Updated: 2022/11/01 22:02:12 by zweng            ###   ########.fr       */
+/*   Updated: 2022/11/02 11:41:52 by zweng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "malloc.h"
-#include <stdio.h>
 
 size_t  get_page_size_from_block_type(t_page_type type, size_t size)
 {

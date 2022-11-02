@@ -6,7 +6,7 @@
 /*   By: zweng <zweng@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 18:35:08 by zweng             #+#    #+#             */
-/*   Updated: 2022/09/23 18:55:49 by zweng            ###   ########.fr       */
+/*   Updated: 2022/11/02 11:39:59 by zweng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void    *start_calloc(size_t count, size_t size)
         return (NULL);
 }
 
-void    *ft_calloc(size_t count, size_t size)
+void    *calloc(size_t count, size_t size)
 {
     void    *res;
 

@@ -6,7 +6,7 @@
 /*   By: zweng <zweng@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 18:04:03 by zweng             #+#    #+#             */
-/*   Updated: 2022/09/23 18:55:57 by zweng            ###   ########.fr       */
+/*   Updated: 2022/11/02 11:40:07 by zweng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void    *start_realloc(void *ptr, size_t size)
     }
 }
 
-void    *ft_realloc(void *ptr, size_t size)
+void    *realloc(void *ptr, size_t size)
 {
     void    *res;
 

@@ -6,7 +6,7 @@
 /*   By: zweng <zweng@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 14:44:04 by zweng             #+#    #+#             */
-/*   Updated: 2022/11/01 21:07:12 by zweng            ###   ########.fr       */
+/*   Updated: 2022/11/02 11:39:46 by zweng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void    *start_malloc(size_t size)
     return (NULL);
 }
 
-void    *ft_malloc(size_t size)
+void    *malloc(size_t size)
 {
     void    *ptr;
 

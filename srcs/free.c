@@ -6,7 +6,7 @@
 /*   By: zweng <zweng@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 12:51:34 by zweng             #+#    #+#             */
-/*   Updated: 2022/10/28 18:21:27 by zweng            ###   ########.fr       */
+/*   Updated: 2022/11/02 11:39:52 by zweng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void    start_free(void *ptr)
     }
 }
 
-void    ft_free(void *ptr)
+void    free(void *ptr)
 {
     pthread_mutex_lock(&g_malloc_mutex);
     start_free(ptr);
