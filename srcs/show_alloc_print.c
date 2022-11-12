@@ -6,13 +6,11 @@
 /*   By: zweng <zweng@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 16:47:42 by zweng             #+#    #+#             */
-/*   Updated: 2022/11/01 21:48:29 by zweng            ###   ########.fr       */
+/*   Updated: 2022/11/12 13:48:42 by zweng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "malloc.h"
-
-
 
 int    print_graph_blk(t_block *blk)
 {
@@ -36,7 +34,6 @@ int    print_graph_blk(t_block *blk)
     }
     return size;
 }
-
 
 /*
  *

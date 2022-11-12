@@ -6,7 +6,7 @@
 /*   By: zweng <zweng@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/18 17:03:46 by zweng             #+#    #+#             */
-/*   Updated: 2022/11/02 11:39:29 by zweng            ###   ########.fr       */
+/*   Updated: 2022/11/12 13:44:53 by zweng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,17 +18,13 @@
 # include <pthread.h>
 # include <sys/mman.h>
 # include <sys/resource.h>
-
 # define TRUE 1
 # define FALSE 0
-
 # define BASE_HEX "0123456789abcdef"
 # define FILL ("▒")
 # define FREED ("_")
 # define PH ("⭐")
 # define BH ("💛")
-
-
 /*
 ** For a pagesize of 4096 bytes
 **
@@ -36,12 +32,9 @@
 ** SMALL - block < 1024 bytes - heap 128 KB
 ** LARGE - block > 1024 bytes
 */
-
 # define PAGE_SHIFT(start) ((void *)start + sizeof(t_page))
 # define BLOCK_SHIFT(start) ((void *)start + sizeof(t_block))
-
 # define PAYLOAD_SIZE(total_s, header_s) (total_s - header_s)
-
 # define TINY_ZONE (4 * getpagesize())
 /* tiny page = 4 * 4096  = 16384 bytes */
 # define TINY_BLOCK (TINY_ZONE / 128)
@@ -69,7 +62,6 @@ typedef enum	e_page_type {
 	LARGE
 }				t_page_type;
 
-// 10 byte
 typedef struct			s_block
 {
     int                 freed;
@@ -78,7 +70,6 @@ typedef struct			s_block
 	struct s_block		*prev;
 }						t_block;
 
-// 8 byte
 typedef struct	s_page {
 	struct s_page	*prev;
 	struct s_page	*next;
@@ -108,7 +99,6 @@ void            *start_malloc(size_t size);
 void            start_free(void *ptr);
 void			*start_calloc(size_t count, size_t size);
 void			*start_realloc(void *ptr, size_t size);
-
 
 /*
  * util functions
