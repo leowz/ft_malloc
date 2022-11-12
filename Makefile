@@ -6,7 +6,7 @@
 #    By: zweng <zweng@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/19 12:41:50 by zweng             #+#    #+#              #
-#    Updated: 2022/11/02 12:22:01 by zweng            ###   ########.fr        #
+#    Updated: 2022/11/12 13:03:43 by zweng            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,8 +20,6 @@ CC			= gcc
 NAME		= libft_malloc_$(HOSTTYPE).so
 
 LIB_NAME	= libft_malloc.so
-
-APP			= ft_malloc
 
 LIB_PATH	= srcs/lib
 
@@ -47,7 +45,7 @@ CFLAGS		= -Wall -Wextra -Werror -fPIC \
 			  $(foreach D, $(HEADER_PATH), -I$(D)) $(DPFLAGS)
 
 SFLAGE		= -shared 
-DEBUGF 		= -fsanitize=address -g
+DEBUGF 		= #-fsanitize=address -g
 
 # ----- part automatic -----
 SRCS = $(addprefix $(C_PATH)/,$(CFILES)) \
